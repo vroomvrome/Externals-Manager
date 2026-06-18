@@ -38,7 +38,6 @@ Padayon!
 
 Lente ng Masa,
 UPB Obra`,
-
   reject: `Good day, {organization}!
 
 We hope this message finds you well. First and foremost, UPB Obra would like to express its gratitude for your interest in exploring a partnership with the organization for {event}. We genuinely appreciate your time and effort in discussing potential partnerships with us.
@@ -60,7 +59,6 @@ UPB Obra`
 function showStatus(message, isError = false) {
   statusMessage.textContent = message;
   statusMessage.style.color = isError ? "#dc2626" : "#15803d";
-
   setTimeout(() => {
     statusMessage.textContent = "";
   }, 2500);
@@ -73,10 +71,7 @@ function formatDate(dateString) {
 
 function getTemplates() {
   const saved = localStorage.getItem(TEMPLATE_KEY);
-
-  if (!saved) {
-    return { ...defaultTemplates };
-  }
+  if (!saved) return { ...defaultTemplates };
 
   try {
     const parsed = JSON.parse(saved);
@@ -139,12 +134,7 @@ function generateEmail(type) {
   const templates = getTemplates();
   const selectedTemplate = type === "accept" ? templates.accept : templates.reject;
 
-  const result = fillTemplate(selectedTemplate, {
-    organization,
-    event
-  });
-
-  generatedEmail.value = result;
+  generatedEmail.value = fillTemplate(selectedTemplate, { organization, event });
   generatedEmail.dataset.responseType = type;
   showStatus("Email generated.");
 }
@@ -202,7 +192,6 @@ function saveCurrentEmail() {
   }
 
   const history = getHistory();
-
   history.unshift({
     organization,
     event,
@@ -227,7 +216,7 @@ async function copyEmail() {
   try {
     await navigator.clipboard.writeText(emailText);
     showStatus("Email copied to clipboard.");
-  } catch (error) {
+  } catch {
     showStatus("Copy failed. Please copy manually.", true);
   }
 }
