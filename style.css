@@ -78,6 +78,28 @@ body {
   font-size: 18px;
 }
 
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text);
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.nav-link.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
 .main-content {
   padding: 32px;
   display: flex;
@@ -91,7 +113,7 @@ body {
   border-radius: 16px;
   padding: 24px;
   box-shadow: var(--shadow);
-  max-width: 980px;
+  max-width: 1200px;
 }
 
 .card h2 {
@@ -116,7 +138,8 @@ label {
 }
 
 input,
-textarea {
+textarea,
+select {
   width: 100%;
   padding: 12px 14px;
   border: 1px solid var(--border);
@@ -130,6 +153,12 @@ textarea {
   resize: vertical;
   line-height: 1.55;
   font-family: inherit;
+}
+
+.checkbox-group input {
+  width: auto;
+  transform: scale(1.2);
+  margin-top: 10px;
 }
 
 .button-group {
@@ -229,14 +258,10 @@ button:hover {
   color: var(--muted);
 }
 
-.empty-text {
-  color: var(--muted);
-  margin: 0;
-}
-
+.empty-text,
 .helper-text {
-  margin: 0;
   color: var(--muted);
+  margin: 0;
 }
 
 .section-header {
@@ -252,6 +277,66 @@ code {
   padding: 2px 6px;
   border-radius: 6px;
   border: 1px solid var(--border);
+}
+
+.filter-select {
+  min-width: 160px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.tracker-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 950px;
+}
+
+.tracker-table th,
+.tracker-table td {
+  border: 1px solid var(--border);
+  padding: 12px;
+  vertical-align: top;
+  text-align: left;
+}
+
+.tracker-table th {
+  background: var(--panel-2);
+}
+
+.empty-cell {
+  text-align: center;
+  color: var(--muted);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: bold;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+}
+
+.status-completed {
+  color: #166534;
+}
+
+.status-pending {
+  color: #92400e;
+}
+
+.table-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.small-btn {
+  padding: 8px 10px;
+  font-size: 12px;
 }
 
 @media (max-width: 900px) {
