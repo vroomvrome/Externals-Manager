@@ -11,7 +11,7 @@
     <aside class="sidebar">
       <div>
         <h1>UPB Obra</h1>
-        <p class="subtitle">Communications Hub</p>
+        <p class="subtitle">Management Dashboard</p>
       </div>
 
       <nav class="sidebar-nav">
@@ -36,82 +36,7 @@
         <div class="section-header">
           <div>
             <h2>Partnership Tracker</h2>
-            <p class="helper-text">Add and manage entries for organizations, deadlines, action points, and notes.</p>
-          </div>
-        </div>
-
-        <form id="trackerForm">
-          <input type="hidden" id="entryId" />
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="organization">Organization / Partnership</label>
-              <input type="text" id="organization" placeholder="e.g. UP POLSCI" />
-            </div>
-
-            <div class="form-group">
-              <label for="deadline">Deadline</label>
-              <input type="date" id="deadline" />
-            </div>
-          </div>
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="assignedTo">Assigned To</label>
-              <input type="text" id="assignedTo" placeholder="e.g. Jiro" />
-            </div>
-
-            <div class="form-group">
-              <label for="title">Email / Title</label>
-              <input type="text" id="title" placeholder="e.g. Invitation to forum" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="information">Information</label>
-            <textarea id="information" rows="5" placeholder="Add relevant details here..."></textarea>
-          </div>
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="action">Suggested Action</label>
-              <select id="action">
-                <option value="">Select action</option>
-                <option value="Follow Up">Follow Up</option>
-                <option value="Negotiate">Negotiate</option>
-                <option value="Coordinate">Coordinate</option>
-                <option value="Review">Review</option>
-                <option value="Approve">Approve</option>
-                <option value="Decline">Decline</option>
-                <option value="Pending Decision">Pending Decision</option>
-              </select>
-            </div>
-
-            <div class="form-group checkbox-group">
-              <label for="completed">Completed</label>
-              <input type="checkbox" id="completed" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="notes">Notes</label>
-            <textarea id="notes" rows="4" placeholder="Add extra notes here..."></textarea>
-          </div>
-
-          <div class="button-group">
-            <button type="submit" class="primary-btn">Save Entry</button>
-            <button type="button" id="resetFormBtn" class="secondary-btn">Clear Form</button>
-          </div>
-        </form>
-
-        <p id="trackerStatusMessage" class="status-message"></p>
-      </section>
-
-      <section class="card">
-        <div class="section-header">
-          <div>
-            <h2>Entries</h2>
-            <p class="helper-text">Manage your saved tracker items below.</p>
+            <p class="helper-text">Manage entries for organizations, deadlines, action points, and notes.</p>
           </div>
 
           <div class="button-group">
@@ -120,8 +45,11 @@
               <option value="pending">Pending</option>
               <option value="completed">Completed</option>
             </select>
+            <button id="openModalBtn" class="primary-btn">+ Add Entry</button>
           </div>
         </div>
+
+        <p id="trackerStatusMessage" class="status-message"></p>
 
         <div class="table-wrap">
           <table class="tracker-table">
@@ -146,6 +74,79 @@
         </div>
       </section>
     </main>
+  </div>
+
+  <div id="entryModal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add Entry</h2>
+        <button id="closeModalBtn" class="close-btn">&times;</button>
+      </div>
+
+      <form id="trackerForm">
+        <input type="hidden" id="entryId" />
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="organization">Organization / Partnership</label>
+            <input type="text" id="organization" placeholder="e.g. UP POLSCI" />
+          </div>
+
+          <div class="form-group">
+            <label for="deadline">Deadline</label>
+            <input type="date" id="deadline" />
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="assignedTo">Assigned To</label>
+            <input type="text" id="assignedTo" placeholder="e.g. Jiro" />
+          </div>
+
+          <div class="form-group">
+            <label for="title">Email / Title</label>
+            <input type="text" id="title" placeholder="e.g. Invitation to forum" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="information">Information</label>
+          <textarea id="information" rows="4" placeholder="Add relevant details here..."></textarea>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="action">Suggested Action</label>
+            <select id="action">
+              <option value="">Select action</option>
+              <option value="Follow Up">Follow Up</option>
+              <option value="Negotiate">Negotiate</option>
+              <option value="Coordinate">Coordinate</option>
+              <option value="Review">Review</option>
+              <option value="Approve">Approve</option>
+              <option value="Decline">Decline</option>
+              <option value="Pending Decision">Pending Decision</option>
+            </select>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label for="completed">Completed</label>
+            <input type="checkbox" id="completed" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Notes</label>
+          <textarea id="notes" rows="3" placeholder="Add extra notes here..."></textarea>
+        </div>
+
+        <div class="button-group">
+          <button type="submit" class="primary-btn">Save Entry</button>
+          <button type="button" id="cancelModalBtn" class="secondary-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
 
   <script src="tracker.js"></script>
