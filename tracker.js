@@ -11,8 +11,13 @@ const notesInput = document.getElementById("notes");
 const trackerTableBody = document.getElementById("trackerTableBody");
 const trackerStatusMessage = document.getElementById("trackerStatusMessage");
 const filterStatus = document.getElementById("filterStatus");
-const resetFormBtn = document.getElementById("resetFormBtn");
 const themeToggle = document.getElementById("themeToggle");
+
+const entryModal = document.getElementById("entryModal");
+const modalTitle = document.getElementById("modalTitle");
+const openModalBtn = document.getElementById("openModalBtn");
+const closeModalBtn = document.getElementById("closeModalBtn");
+const cancelModalBtn = document.getElementById("cancelModalBtn");
 
 const TRACKER_KEY = "upbObraTrackerEntries";
 const THEME_KEY = "emailGeneratorTheme";
@@ -47,6 +52,16 @@ function resetForm() {
 
 function generateId() {
   return crypto.randomUUID ? crypto.randomUUID() : String(Date.now());
+}
+
+function openModal(isEdit = false) {
+  modalTitle.textContent = isEdit ? "Edit Entry" : "Add Entry";
+  entryModal.classList.remove("hidden");
+}
+
+function closeModal() {
+  entryModal.classList.add("hidden");
+  resetForm();
 }
 
 function renderEntries() {
@@ -138,8 +153,7 @@ function editEntry(id) {
   completedInput.checked = entry.completed;
   notesInput.value = entry.notes;
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
-  showTrackerStatus("Entry loaded for editing.");
+  openModal(true);
 }
 
 function toggleEntryStatus(id) {
@@ -209,7 +223,7 @@ function handleSubmit(event) {
 
   saveEntries(updatedEntries);
   renderEntries();
-  resetForm();
+  closeModal();
 }
 
 function loadTheme() {
@@ -225,10 +239,18 @@ function toggleTheme() {
   localStorage.setItem(THEME_KEY, isDark ? "dark" : "light");
 }
 
+openModalBtn.addEventListener("click", () => openModal(false));
+closeModalBtn.addEventListener("click", closeModal);
+cancelModalBtn.addEventListener("click", closeModal);
 trackerForm.addEventListener("submit", handleSubmit);
 filterStatus.addEventListener("change", renderEntries);
-resetFormBtn.addEventListener("click", resetForm);
 themeToggle.addEventListener("click", toggleTheme);
+
+entryModal.addEventListener("click", (event) => {
+  if (event.target === entryModal) {
+    closeModal();
+  }
+});
 
 loadTheme();
 renderEntries();
